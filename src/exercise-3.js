@@ -4,11 +4,12 @@ both function should return array of filtered users
 do not forget to also delete used function (implicit binding)
  */
 
-let users = [{
-  name: "Peter",
-  age: 32,
-  email: "peter@gmail.com"
-},
+let users = [
+  {
+    name: "Peter",
+    age: 32,
+    email: "peter@gmail.com"
+  },
   {
     name: "John",
     age: 15,
@@ -33,12 +34,28 @@ function validateAge(age) {
 function usingImplicitBinding(users, validateAgeFunc, ageLimit) {
   let invalidUsers = [];
 
+  users.forEach((user)=> {
+    // global.age = user.age;
+
+
+    user.amIAbleToDrink = validateAgeFunc
+    if (user.amIAbleToDrink(ageLimit)) {
+      delete user.amIAbleToDrink
+      invalidUsers.push(user)
+    }
+  })
+
   return invalidUsers;
 }
 
 function usingExplicitBinding(users, validateAgeFunc, ageLimit) {
   let invalidUsers = [];
 
+  users.forEach((user)=> {
+    if (validateAgeFunc.call(user, ageLimit)) {
+      invalidUsers.push(user)
+    }
+  })
   return invalidUsers;
 }
 

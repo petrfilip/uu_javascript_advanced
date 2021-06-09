@@ -19,7 +19,7 @@ test("test7", () => {
 
   for (let i = 0; i < myFactory.warehouse.createdCars.length; i += 2) {
     let car = myFactory.warehouse.createdCars[i];
-    if (myFactory.changeCarColor(car) !== null) {} else {
+    if (myFactory.changeCarColor(car, "blue") !== null) {} else {
       if (energyBoosts.length > 0) {
         myFactory.addEnergyPower(energyBoosts.shift());
         i -= 2;

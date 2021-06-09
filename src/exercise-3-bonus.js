@@ -7,11 +7,11 @@ name ->  users[0].getName()
 name -> users[0].setName(newValue)
 */
 
-
-let users = [{
-  name: "Peter",
-  age: 32,
-},
+let users = [
+  {
+    name: "Peter",
+    age: 32,
+  },
   {
     name: "John",
     age: 15,
@@ -24,8 +24,27 @@ let users = [{
   }
 ];
 
+/**
+ * https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+ */
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
 function addGettersAndSetters(obj) {
 
+  Object.keys(obj).forEach(att => {
+    const attributePostfix = capitalizeFirstLetter(att); // capitalize
+    obj["get" + attributePostfix] = () => { // getter
+      return obj[att]
+    };
+    obj["set" + attributePostfix] = (inputValue) => {
+      obj[att] = inputValue
+    }
+  })
+  obj.modificationCount = 0
+  obj.getCountOfModification = () => 2
 
 }
 

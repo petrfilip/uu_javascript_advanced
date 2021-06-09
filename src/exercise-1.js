@@ -19,11 +19,17 @@ each object should contains:
   ]
  */
 
-function getInfo() {
+function getInfo(...values) {
   var results = [];
 
-  values.forEach((value) => {
 
+  values.forEach((value, index) => {
+    results.push({
+      "isFalsy": !value,
+      "type": typeof value,
+      "StringLength": value.toString().length,
+      "index": index
+    })
 
 
   });
