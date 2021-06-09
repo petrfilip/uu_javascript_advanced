@@ -6,15 +6,18 @@
 function printString(string) {
   console.log("Started: " + string)
 
-  setTimeout(() => {
-    console.log(string)
-  }, Math.floor(Math.random() * 100) +1)
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log(string)
+      resolve()
+    }, Math.floor(Math.random() * 100) + 1)
+  })
 }
 
-function printAll() {
-  printString("A")
-  printString("B")
-  printString("C")
+async function printAll() {
+  await printString("A")
+  await printString("B")
+  await printString("C")
 }
 
 printAll()

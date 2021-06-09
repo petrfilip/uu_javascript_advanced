@@ -3,17 +3,33 @@
  the result and was called in the correct order.
  */
 
-function addString(previous, current) {
-  setTimeout(() => {
-    console.log(previous + " " + current)
-  }, Math.floor(Math.random() * 100) + 1)
+function addString(previous, current, callback) {
+  setTimeout(
+    () => {
+      callback((previous + ' ' + current))
+    },
+    Math.floor(Math.random() * 100) + 1
+  )
 }
 
 function addAll() {
-  let result = addString("", "A")
-  result = addString(result, "B")
-  result = addString(result, "C")
-  console.log(result)
+  addA('');
 }
 
-addAll()
+function addA(value) {
+  addString(value, 'A', addB);
+}
+
+function addB(value) {
+  addString(value, 'B', addC);
+}
+
+function addC(value) {
+  addString(value, 'C', print);
+}
+
+function print(value) {
+  console.log(value);
+}
+
+addAll();

@@ -3,18 +3,20 @@
  returns the result and was called in the correct order.
  */
 
-function addString(previous, current) {
-  setTimeout(() => {
-    return (previous + " " + current)
-  }, Math.floor(Math.random() * 100) + 1)
+async function addString(previous, current) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(previous + " " + current);
+    }, Math.floor(Math.random() * 100) + 1);
+  });
 }
 
-
-function addAll() {
-  let result = addString("", "A")
-  result = addString(result, "B")
-  result = addString(result, "C")
-  console.log(result)
+async function addAll() {
+  let result = "";
+  result = await addString(result, "A");
+  result = await addString(result, "B");
+  result = await addString(result, "C");
+  console.log(result);
 }
 
-addAll()
+addAll();

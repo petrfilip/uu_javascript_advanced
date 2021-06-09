@@ -5,16 +5,21 @@
 
 function printString(string) {
   console.log("Started: " + string)
+  return new Promise((resolve, reject) => {
 
-  setTimeout(() => {
-    console.log(string)
-  }, Math.floor(Math.random() * 100) +1)
+    setTimeout(() => {
+      console.log(string)
+      resolve()
+    }, Math.floor(Math.random() * 100) + 1)
+  })
 }
 
 function printAll() {
   printString("A")
-  printString("B")
-  printString("C")
+    .then((r) => printString("B"))
+    .then((r)=> printString("C"))
+
+
 }
 
 printAll()

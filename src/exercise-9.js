@@ -4,17 +4,18 @@
  */
 
 function addString(previous, current) {
-  setTimeout(() => {
-    return (previous + " " + current)
-  }, Math.floor(Math.random() * 100) + 1)
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(previous + " " + current);
+    }, Math.floor(Math.random() * 100) + 1);
+  });
 }
-
 
 function addAll() {
-  let result = addString("", "A")
-  result = addString(result, "B")
-  result = addString(result, "C")
-  console.log(result)
+  addString("", "A")
+    .then(result => addString(result, "B"))
+    .then(result => addString(result, "C"))
+    .then(result => console.log(result));
 }
 
-addAll()
+addAll();
