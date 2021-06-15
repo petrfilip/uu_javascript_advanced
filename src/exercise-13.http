@@ -1,0 +1,15 @@
+GET http://localhost:5556/getBook/998
+Accept: application/json
+
+###
+### Create new book
+POST http://localhost:5556/createBook
+Content-Type: application/json
+
+{
+  "code": "998",
+  "name": "How to run",
+  "author": "Oscar"
+}
+
+

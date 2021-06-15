@@ -10,5 +10,10 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^24.5.0"
+  },
+  "dependencies": {
+    "ajv": "^6.12.6",
+    "express": "^4.17.1",
+    "lru-cache": "^6.0.0"
   }
 }
