@@ -42,4 +42,9 @@ users[2].setName("Peter");
 users[2].setAge(15);
 expect(users[2].getCountOfModification()).toEqual(2);
 
+users[1].setName("Milan");
+expect(users[1].getCountOfModification()).toEqual(1);
+
+expect(users[0].getCountOfModification()).toEqual(0);
+
 });

@@ -2,16 +2,16 @@
  *
  *
  ■ Implement a class that contains methods for saving and loading a book.
- ■ API: async createbook (book), async getbook (code)
- ■ Each book contains at least the code, name, and author attributes
- ■ Books will be saved in json format
- ■ The books.json file
- ■ Working with json using API: JSON.parse(), JSON.stringify(obj)
- ■ Use asynchronous API fs.readFile and fs.writeFile
- ■ For ease of use, use the util.promisify library
- ■ Error handling - books.json does not exist, bad format.
- ■ book code must be unique - check when saving
- ■ If a book with an existing code is saved, an exception with the code
+ ■ [x] - API: async createbook (book), async getbook (code)
+ ■ [x] - Each book contains at least the code, name, and author attributes
+ ■ [x] - Books will be saved in json format
+ ■ [x] - The books.json file
+ ■ [x] - Working with json using API: JSON.parse(), JSON.stringify(obj)
+ ■ [?] - Use asynchronous API fs.readFile and fs.writeFile
+ ■ [?] - For ease of use, use the util.promisify library
+ ■ [] - Error handling - books.json does not exist, bad format.
+ ■ [x] - book code must be unique - check when saving
+ ■ [x] -  If a book with an existing code is saved, an exception with the code
  attribute "DUPLICATE_CODE" is dropped.
  *
  *
@@ -27,10 +27,13 @@ const validateBook = book => {
 };
 
 const readFile = async (path) => {
+
   try {
     return await fs.promises.readFile(path);
   } catch (e) {
-    console.log(`File ${path} does not exists`)
+    console.log(`Something went write when accessing ${path}`)
+    console.error(e)
+    throw Error("READ_FILE_ERROR")
   }
 }
 
@@ -39,6 +42,7 @@ const writeFile = async (path, data) => {
     return await fs.promises.writeFile(path, data);
   } catch (e) {
     console.log(`Something went wrong with file ${path}`)
+    throw e;
   }
 }
 
@@ -68,14 +72,12 @@ class BookManager {
     const books = await loadAllBooks()
     books.push(newBook)
 
-    const isWritten = await writeFile(booksStorage, JSON.stringify(books))
-    return isWritten
+    return await writeFile(booksStorage, JSON.stringify(books))
   }
 
   async getBook(code) {
     const books = await loadAllBooks();
-    const foundBook = await books.find(book => book.code === code)
-    return foundBook
+    return books.find(book => book.code === code)
   }
 
 }

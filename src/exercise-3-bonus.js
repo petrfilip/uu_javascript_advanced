@@ -40,11 +40,12 @@ function addGettersAndSetters(obj) {
       return obj[att]
     };
     obj["set" + attributePostfix] = (inputValue) => {
+      obj.modificationCount++
       obj[att] = inputValue
     }
   })
   obj.modificationCount = 0
-  obj.getCountOfModification = () => 2
+  obj.getCountOfModification = () => obj.modificationCount
 
 }
 
